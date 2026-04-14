@@ -2,11 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, role='PASSENGER'):
+    def create_user(self, email, name=None, password=None, role='PASSENGER', phone=None):
         if not email:
             raise ValueError("Users must have an email!")
         email = self.normalize_email(email)
-        user = self.model(email=email, role=role)
+        user = self.model(email=email, name=name, role=role, phone=phone)
         user.set_password(password)
         user.save()
         return user
